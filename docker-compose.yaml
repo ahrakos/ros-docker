@@ -1,0 +1,56 @@
+version: "3"
+services:
+    roscore:
+        build:
+            context: .
+            args:
+                ROS_DISTRO: ${ROS_DISTRO}
+                ROS_MASTER_URI: http://${ROS_MASTER_IP}:${ROS_MASTER_PORT}
+                SCRIPT_FOLDER: roscore
+        networks:
+            witty:
+                ipv4_address: ${ROS_MASTER_IP}
+        tty: true
+        stdin_open: true
+    rosrun_1:
+        build:
+            context: .
+            args:
+                ROS_DISTRO: ${ROS_DISTRO}
+                ROS_MASTER_URI: http://${ROS_MASTER_IP}:${ROS_MASTER_PORT}
+                SCRIPT_FOLDER: node
+        networks:
+            witty:
+                ipv4_address: ${ROSRUN_NODE_1}
+        environment:
+            QT_X11_NO_MITSHM: 1
+            DISPLAY: 192.168.1.100:0
+            ROS_MASTER_URI: http://${ROS_MASTER_IP}:${ROS_MASTER_PORT}
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix:rw
+        tty: true
+        stdin_open: true
+        depends_on:
+            - roscore
+    rosrun_2:
+        build:
+            context: .
+            args:
+                ROS_DISTRO: ${ROS_DISTRO}
+                ROS_MASTER_URI: http://${ROS_MASTER_IP}:${ROS_MASTER_PORT}
+                SCRIPT_FOLDER: teleop
+        networks:
+            witty:
+                ipv4_address: ${ROSRUN_NODE_2}
+        tty: true
+        stdin_open: true
+        depends_on:
+            - rosrun_1
+
+networks:
+    witty:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: ${NETWORK_SUBNET}
