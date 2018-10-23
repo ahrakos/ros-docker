@@ -54,8 +54,8 @@ RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc \
     && mkdir -p ~/catkin_ws/src \
     && cd ~/catkin_ws/ \
     && catkin_make \
-    && echo "source devel/setup.bash" >> ~/.bashrc \
-    && source devel/setup.bash
+    && echo "source /root/catkin_ws/devel/setup.bash" >> ~/.bashrc \
+    && source /root/catkin_ws/devel/setup.bash
 
 # setup entrypoint
 COPY ./${SCRIPT_FOLDER}/index.sh /

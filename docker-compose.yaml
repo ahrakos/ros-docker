@@ -10,6 +10,8 @@ services:
         networks:
             witty:
                 ipv4_address: ${ROS_MASTER_IP}
+        volumes:
+            - ./src:/root/catkin_ws/src
         tty: true
         stdin_open: true
     rosrun_1:
@@ -45,6 +47,8 @@ services:
         env_file:
             - .env
             - ./envs/.env_turtlesim_teleop
+        volumes:
+            - ./src:/root/catkin_ws/src
         tty: true
         stdin_open: true
         depends_on:
