@@ -47,6 +47,8 @@ RUN apt-get update -y \
     && apt-get install -y ros-${ROS_DISTRO}-turtlesim \
     && export ROS_IP=`hostname -I`
 
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+
 # setup entrypoint
 COPY ./${SCRIPT_FOLDER}/index.sh /
 
