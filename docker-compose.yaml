@@ -22,12 +22,9 @@ services:
         networks:
             witty:
                 ipv4_address: ${ROSRUN_NODE_1}
-        environment:
-            QT_X11_NO_MITSHM: 1
-            DISPLAY: 172.18.33.39:0
-            ROS_MASTER_URI: http://${ROS_MASTER_IP}:${ROS_MASTER_PORT}
-            PACKAGE_NAME: turtlesim
-            NODE_NAME: turtlesim_node
+        env_file:
+            - .env
+            - ./envs/.env_turtlesim
         volumes:
             - /tmp/.X11-unix:/tmp/.X11-unix:rw
         tty: true
@@ -40,13 +37,13 @@ services:
             args:
                 ROS_DISTRO: ${ROS_DISTRO}
                 ROS_MASTER_URI: http://${ROS_MASTER_IP}:${ROS_MASTER_PORT}
-                SCRIPT_FOLDER: teleop
+                SCRIPT_FOLDER: rosrun
         networks:
             witty:
                 ipv4_address: ${ROSRUN_NODE_2}
-        environment:
-            PACKAGE_NAME: turtlesim
-            NODE_NAME: turtle_teleop_key
+        env_file:
+            - .env
+            - ./envs/.env_turtlesim_teleop
         tty: true
         stdin_open: true
         depends_on:
