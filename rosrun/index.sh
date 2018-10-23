@@ -3,6 +3,6 @@ set -e
 
 # setup ros environment
 source "/opt/ros/$ROS_DISTRO/setup.bash" \
-&& rosrun turtlesim turtlesim_node
+&& rosrun $PACKAGE_NAME $NODE_NAME
 
 echo "$@"
