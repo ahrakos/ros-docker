@@ -27,6 +27,7 @@ services:
             - ./envs/.env_turtlesim
         volumes:
             - /tmp/.X11-unix:/tmp/.X11-unix:rw
+            - ./src:/root/catkin_ws/src
         tty: true
         stdin_open: true
         depends_on:

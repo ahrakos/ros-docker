@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
-rosrun $PACKAGE_NAME $NODE_NAME
+# setup ros environment
+source "/opt/ros/$ROS_DISTRO/setup.bash" \
+&& rosrun $PACKAGE_NAME $NODE_NAME
 
 echo "$@"
