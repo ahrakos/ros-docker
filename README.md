@@ -19,15 +19,18 @@ After that, restart your computer, and open Quartz again. This time open a termi
     ```
     $ ifconfig | grep inet
     ```
-and grab your local IP Address. Then, run the command:
+    
+    and grab your local IP Address. Then, run the command:
     ```
     $ xhost
     $ xhost <Your IP Address> (e.g xhost 172.15.8.52)
     ```
-Now, update the .env_turtlesim file under the envs folder, with your IP Address as the DISPLAY property.
+    
+    Now, update the .env_turtlesim file under the envs folder, with your IP Address as the DISPLAY property.
     ```
     e.g DISPLAY=172.80.5.10:0
     ```
+    
 4. Open a terminal in the project's folder, and run this command:
     ```
     $ docker-compose up -d
@@ -54,6 +57,7 @@ which allows you to take control of the robot and move it with your arrow keys.
     ```
     $ docker container ls
     ```
+    
 to find out the container ids. You will find out there are 3 containers.
 Now copy one id (It doesn't matter which ID you are copying, since all of them are connected to the same volume on your
 file system - which is the folder 'workspace' on the project).
