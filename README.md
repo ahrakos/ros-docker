@@ -58,24 +58,23 @@ which allows you to take control of the robot and move it with your arrow keys.
     $ docker container ls
     ```
     
-to find out the container ids. You will find out there are 3 containers.
-Now copy one id (It doesn't matter which ID you are copying, since all of them are connected to the same volume on your
-file system - which is the folder 'workspace' on the project).
-Now get into the container via this command:
+    to find out the container ids. You will find out there are 3 containers.
+    Now copy one id (It doesn't matter which ID you are copying, since all of them are connected to the same volume on your
+    file system - which is the folder 'workspace' on the project).
+    Now get into the container via this command:
     ```
     $ docker container exec -it <CONTAINER_ID> bash
     ```
     
-You will now get access to the container, and all you have to do is actually run this command:
+    You will now get access to the container, and all you have to do is actually run this command:
     ```
     $ catkin_create_pkg <PACKAGE_NAME> <DEP_1> <DEP_2> <DEP_3> ... <DEP_N>
     ```
     
-while DEP_1 ... DEP_N are dependencies of your package.
+    while DEP_1 ... DEP_N are dependencies of your package.
 
-Now after you created your package, you can go back to the project's folder (Outside the container, yes, in YOUR computer),
-and find out that the files were created inside 'workspace' folder.
-
+    Now after you created your package, you can go back to the project's folder (Outside the container, yes, in YOUR    
+    computer), and find out that the files were created inside 'workspace' folder.
 
 - Compile a package: Get into one of the containers, as explained in the last paragraph, and write down:
     ```
