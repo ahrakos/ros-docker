@@ -33,7 +33,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python-vcstools \
     && rm -rf /var/lib/apt/lists/*
 
-
 # bootstrap rosdep
 RUN rosdep init \
     && rosdep update

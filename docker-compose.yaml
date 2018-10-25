@@ -11,7 +11,7 @@ services:
             witty:
                 ipv4_address: ${ROS_MASTER_IP}
         volumes:
-            - ./src:/root/catkin_ws/src
+            - workspace:/root/catkin_ws/src
         tty: true
         stdin_open: true
     rosrun_1:
@@ -29,7 +29,7 @@ services:
             - ./envs/.env_turtlesim
         volumes:
             - /tmp/.X11-unix:/tmp/.X11-unix:rw
-            - ./src:/root/catkin_ws/src
+            - workspace:/root/catkin_ws/src
         tty: true
         stdin_open: true
         depends_on:
@@ -48,7 +48,7 @@ services:
             - .env
             - ./envs/.env_turtlesim_teleop
         volumes:
-            - ./src:/root/catkin_ws/src
+            - workspace:/root/catkin_ws/src
         tty: true
         stdin_open: true
         depends_on:
@@ -61,3 +61,11 @@ networks:
             driver: default
             config:
                 - subnet: ${NETWORK_SUBNET}
+
+volumes:
+    workspace:
+        driver: local
+        driver_opts:
+            o: bind
+            type: none
+            device: ${PWD}/workspace
