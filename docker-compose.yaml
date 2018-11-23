@@ -1,6 +1,7 @@
 version: "3"
 services:
     roscore:
+        container_name: roscore
         build:
             context: .
             args:
@@ -14,19 +15,19 @@ services:
             - workspace:/root/catkin_ws/src
         tty: true
         stdin_open: true
-    rosrun_1:
+    roslaunch_1:
         build:
             context: .
             args:
                 ROS_DISTRO: ${ROS_DISTRO}
                 ROS_MASTER_URI: http://${ROS_MASTER_IP}:${ROS_MASTER_PORT}
-                SCRIPT_FOLDER: rosrun
+                SCRIPT_FOLDER: roslaunch
         networks:
             witty:
                 ipv4_address: ${ROSRUN_NODE_1}
         env_file:
             - .env
-            - ./envs/.env_turtlesim
+            - ./envs/.env_turtlebot_gazebo
         volumes:
             - /tmp/.X11-unix:/tmp/.X11-unix:rw
             - workspace:/root/catkin_ws/src
@@ -34,25 +35,25 @@ services:
         stdin_open: true
         depends_on:
             - roscore
-    rosrun_2:
-        build:
-            context: .
-            args:
-                ROS_DISTRO: ${ROS_DISTRO}
-                ROS_MASTER_URI: http://${ROS_MASTER_IP}:${ROS_MASTER_PORT}
-                SCRIPT_FOLDER: rosrun
-        networks:
-            witty:
-                ipv4_address: ${ROSRUN_NODE_2}
-        env_file:
-            - .env
-            - ./envs/.env_turtlesim_teleop
-        volumes:
-            - workspace:/root/catkin_ws/src
-        tty: true
-        stdin_open: true
-        depends_on:
-            - rosrun_1
+    # rosrun_2:
+    #     build:
+    #         context: .
+    #         args:
+    #             ROS_DISTRO: ${ROS_DISTRO}
+    #             ROS_MASTER_URI: http://${ROS_MASTER_IP}:${ROS_MASTER_PORT}
+    #             SCRIPT_FOLDER: rosrun
+    #     networks:
+    #         witty:
+    #             ipv4_address: ${ROSRUN_NODE_2}
+    #     env_file:
+    #         - .env
+    #         - ./envs/.env_ex1
+    #     volumes:
+    #         - workspace:/root/catkin_ws/src
+    #     tty: true
+    #     stdin_open: true
+    #     depends_on:
+    #         - rosrun_1
 
 networks:
     witty:

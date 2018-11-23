@@ -56,6 +56,30 @@ RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc \
     && echo "source /root/catkin_ws/devel/setup.bash" >> ~/.bashrc \
     && source /root/catkin_ws/devel/setup.bash
 
+RUN apt-get update --fix-missing -y \
+    && apt-get install -y \
+    # && apt-get install -y curl \
+    # && curl -ssL http://get.gazebosim.org | sh \
+    # && apt-get install -y ros-kinetic-gazebo9-ros-control \
+    # && apt-get install -y ros-kinetic-gazebo9-ros-pkgs \
+    # && apt-get install -y ros-kinetic-turtlebot-apps \
+    # ros-kinetic-turtlebot-rviz-launchers \
+    # ros-kinetic-turtlebot-interactions \
+    libsdformat4 \
+    libgazebo7 \
+    gazebo7-common \
+    gazebo7 \ 
+    libgazebo7-dev \
+    ros-kinetic-gazebo-dev \ 
+    ros-kinetic-gazebo-msgs \
+    ros-kinetic-gazebo-plugins \
+    ros-kinetic-gazebo-ros \
+    ros-kinetic-kobuki-gazebo-plugins \
+    ros-kinetic-turtlebot-gazebo \
+    ros-kinetic-turtlebot-simulator \
+    mesa-utils
+
+
 # setup entrypoint
 COPY ./${SCRIPT_FOLDER}/index.sh /
 
