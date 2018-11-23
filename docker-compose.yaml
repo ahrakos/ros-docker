@@ -29,7 +29,7 @@ services:
             - .env
             - ./envs/.env_turtlebot_gazebo
         volumes:
-            - /tmp/.X11-unix:/tmp/.X11-unix:rw
+            # - /tmp/.X11-unix:/tmp/.X11-unix:rw
             - workspace:/root/catkin_ws/src
         tty: true
         stdin_open: true
@@ -69,4 +69,4 @@ volumes:
         driver_opts:
             o: bind
             type: none
-            device: ${PWD}/workspace
+            device: ${WORKSPACE_FOLDER}
